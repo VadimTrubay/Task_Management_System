@@ -47,6 +47,16 @@ To access the Swagger UI, go to:
 
 http://127.0.0.1:8000/api/schema/swagger-ui/
 
+# WebSocket Connection for Task Status Notifications:
+
+- Open Postman.
+- Enter the following WebSocket URL: `ws://127.0.0.1:8000/ws/tasks/`
+- In the Headers section, add the following header for authorization:
+- Key: Authorization
+- Value: Bearer <your_access_token>
+- Once connected, you will start receiving notifications whenever the status of a task changes.
+
+
 # Used technologies:
 
 - Python

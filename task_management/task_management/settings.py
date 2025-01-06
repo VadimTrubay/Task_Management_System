@@ -26,6 +26,7 @@ POSTGRES_PORT = env("POSTGRES_PORT")
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -33,10 +34,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # My Apps
-    "tasks",
-    "users",
+    "tasks.apps.TasksConfig",
+    "users.apps.UsersConfig",
     "rest_framework",
     "django_filters",
+    "channels",
     "drf_spectacular",
 ]
 
@@ -176,3 +178,12 @@ SPECTACULAR_SETTINGS = {
 }
 
 AUTH_USER_MODEL = "users.CustomUser"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}

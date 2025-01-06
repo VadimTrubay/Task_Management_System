@@ -5,6 +5,8 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 
+from tasks.routing import websocket_urlpatterns
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
@@ -15,4 +17,5 @@ urlpatterns = [
     ),
     path("api/v1/", include("tasks.urls")),
     path("api/v1/", include("users.urls")),
+    path("", include(websocket_urlpatterns)),
 ]
