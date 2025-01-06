@@ -40,6 +40,13 @@ Test project for DRF(django rest framework)
 
 http://127.0.0.1:8000
 
+
+### Swagger UI:
+
+To access the Swagger UI, go to:
+
+http://127.0.0.1:8000/api/schema/swagger-ui/
+
 # Used technologies:
 
 - Python
