@@ -23,6 +23,8 @@ POSTGRES_PASSWORD = env("POSTGRES_PASSWORD")
 POSTGRES_HOST = env("POSTGRES_HOST")
 POSTGRES_PORT = env("POSTGRES_PORT")
 
+REDIS_HOST = env("REDIS_HOST")
+
 
 # Application definition
 
@@ -112,7 +114,7 @@ else:
     CACHES = {
         "default": {
             "BACKEND": "django_redis.cache.RedisCache",
-            "LOCATION": "redis://127.0.0.1:6379/1",
+            "LOCATION": f"redis://{REDIS_HOST}:6379/1",
             "OPTIONS": {
                 "CLIENT_CLASS": "django_redis.client.DefaultClient",
                 "SOCKET_CONNECT_TIMEOUT": 5,
@@ -125,7 +127,7 @@ else:
         "default": {
             "BACKEND": "channels_redis.core.RedisChannelLayer",
             "CONFIG": {
-                "hosts": [("127.0.0.1", 6379)],
+                "hosts": [(REDIS_HOST, 6379)],
             },
         },
     }
