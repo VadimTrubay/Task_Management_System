@@ -6,4 +6,4 @@ class TasksConfig(AppConfig):
     name = "tasks"
 
     def ready(self):
-        pass
+        import tasks.signals  # Ensure this line is present
