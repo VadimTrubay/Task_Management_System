@@ -23,7 +23,7 @@ ALGORITHM = "HS256"
 def get_user(token):
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=ALGORITHM)
-        print("payload", payload)
+
     except Exception:
         print("no payload")
         return AnonymousUser()
@@ -52,12 +52,10 @@ class TokenAuthMiddleware(BaseMiddleware):
             if token.startswith("Bearer "):
                 token = token[7:]
 
-            print(f"Token received: {token}")
         except ValueError as e:
             print("Invalid token", e)
 
         scope["user"] = await get_user(token)
-        print("Token scope", scope["user"])
         return await super().__call__(scope, receive, send)
 
 

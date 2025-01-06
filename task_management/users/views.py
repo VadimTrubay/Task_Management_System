@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
@@ -18,7 +18,7 @@ class SignupView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         token_data = serializer.save()
 
-        return Response(token_data)
+        return Response(token_data, status=status.HTTP_201_CREATED)
 
 
 class SigninView(TokenViewBase):
