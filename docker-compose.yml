@@ -12,11 +12,12 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      - postgres
+      - redis
     networks:
       - app_network
 
-  db:
+  postgres:
     image: postgres:16.4
     env_file:
       - .env
@@ -27,8 +28,19 @@ services:
     networks:
       - app_network
 
+  redis:
+    image: redis:7.0-alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - app_network
+
 networks:
   app_network:
 
 volumes:
   postgres_data:
+  redis_data:
