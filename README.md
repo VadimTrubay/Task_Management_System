@@ -36,6 +36,11 @@ Test project for DRF(django rest framework)
 
     docker-compose up --build  
 
+### You can run tests using pytest:
+  To start the using Docker, run:
+
+    pytest
+
 #### use application for url:
 
 http://127.0.0.1:8000

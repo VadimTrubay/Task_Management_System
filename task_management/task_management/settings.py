@@ -1,4 +1,5 @@
 import os
+import sys
 from datetime import timedelta
 
 import environ
@@ -187,3 +188,9 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+if "test" in sys.argv:
+    DATABASES["default"] = {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": ":memory:",
+    }
