@@ -20,7 +20,9 @@ class TestUserViews:
 
     @pytest.fixture
     def create_authenticated_client(self, api_client, create_user):
-        user = create_user(username="testuser", password="password")
+        user = create_user(
+            username="testuser", email="testuser@example.com", password="password123"
+        )
         token = RefreshToken.for_user(user)
         api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {token.access_token}")
         return api_client
@@ -37,9 +39,11 @@ class TestUserViews:
         assert "access_token" in response.data
 
     def test_login(self, api_client, create_user):
-        user = create_user(username="testuser", password="password")
+        user = create_user(
+            username="testuser", email="testuser@example.com", password="password123"
+        )
         url = "/api/v1/users/login/"
-        data = {"username": "testuser", "password": "password"}
+        data = {"email": "testuser@example.com", "password": "password123"}
         response = api_client.post(url, data, format="json")
         assert response.status_code == status.HTTP_200_OK
         assert "access_token" in response.data
